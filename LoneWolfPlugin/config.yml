@@ -1,5 +1,12 @@
-broadcast-message: "&c%player% has died from mining obsidian with the pickaxe of death."
 pickaxe-name: "&c&lPICKAXE OF DEATH"
 pickaxe-lore:
-  - "&cThis is line one"
-  - "&6This is line two"
+  - "&cyou can add more"
+  - "&6lines if you would"
+  - "&clike to"
+
+messages:
+  balance-reset: "&7Your balance was reset to &a$0&7."
+  broadcast: "&c%player% &7has died from mining obsidian with the pickaxe of death."
+  incorrect-args: "&7Incorrect args. Try &c/suicidepickaxe <player>"
+  pickaxe-given: "&7You gave a pickaxe to &c%target%&7."
+  pickaxe-received: "&7You have received a pickaxe of death."

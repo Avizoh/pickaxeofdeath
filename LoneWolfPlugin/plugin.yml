@@ -1,7 +1,7 @@
 name: PickaxeOfDeath
 main: me.avizoh.custompickaxe.CustomPickaxe
 author: Avizoh
-version: 1.0.0
+version: 1.0.1
 commands:
   suicidepickaxe:
     description: Gives a player the pickaxe of death

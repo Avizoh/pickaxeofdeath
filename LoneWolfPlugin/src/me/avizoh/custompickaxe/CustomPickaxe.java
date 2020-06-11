@@ -3,23 +3,19 @@ package me.avizoh.custompickaxe;
 import me.avizoh.custompickaxe.commands.PickaxeCommand;
 import me.avizoh.custompickaxe.events.ObsidianBreakEvent;
 import net.milkbowl.vault.economy.Economy;
-import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
-import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
-import java.io.IOException;
 
 public class CustomPickaxe extends JavaPlugin {
-
-    public static CustomPickaxe instance;
 
     public Economy econ;
     public FileConfiguration config;
     public File configFile;
+    public static CustomPickaxe instance;
 
     PluginManager pm = getServer().getPluginManager();
 
@@ -34,7 +30,8 @@ public class CustomPickaxe extends JavaPlugin {
             pm.disablePlugin(this);
             return;
         }
-        pm.registerEvents(new ObsidianBreakEvent(this), this);
+
+        pm.registerEvents(new ObsidianBreakEvent(), this);
 
         createConfig();
         this.config = getConfig();
@@ -42,35 +39,19 @@ public class CustomPickaxe extends JavaPlugin {
     }
 
     @Override
-    public void onDisable() {
-        instance = null;
-        saveConfig();
-    }
+    public void onDisable() { instance = null; saveConfig(); }
 
     private void createConfig() {
         this.configFile = new File(getDataFolder(), "config.yml");
         if (!this.configFile.exists()) { saveDefaultConfig(); }
     }
-
     private boolean setupEconomy() {
-        if (pm.getPlugin("Vault") == null) {
-            return false;
-        }
-
+        if (pm.getPlugin("Vault") == null) { return false; }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
-        if (rsp == null) {
-            return false;
-        }
+        if (rsp == null) { return false; }
         econ = rsp.getProvider();
         return econ != null;
     }
-
-    public Economy getEconomy() {
-        return econ;
-    }
-
-    public static CustomPickaxe getInstance() {
-        return instance;
-    }
-
+    public Economy getEconomy() { return econ; }
+    public static CustomPickaxe getInstance() { return instance; }
 }
