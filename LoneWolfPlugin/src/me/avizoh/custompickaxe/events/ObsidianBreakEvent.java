@@ -25,7 +25,7 @@ public class ObsidianBreakEvent implements Listener {
 
         if (event.getBlock().getType() != Material.COBBLESTONE) return;
         if (event.getBlock().getType() == Material.COBBLESTONE) {
-            if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.RED + "PICKAXE OF DEATH") && player.getItemInHand().getItemMeta().getLore().contains(ChatColor.GOLD + "This pickaxe kills you upon mining obsidian.")) {
+            if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE && player.getItemInHand().getItemMeta().getDisplayName().equalsIgnoreCase(ChatColor.translateAlternateColorCodes('&', CustomPickaxe.getInstance().getConfig().getString("pickaxe-name"))) && player.getItemInHand().getItemMeta().getLore().contains(ChatColor.translateAlternateColorCodes('&', CustomPickaxe.getInstance().getConfig().getString("pickaxe-lore")))) {
                 player.setHealth(0.0);
                 player.spigot().respawn();
                 message = message.replace("%player%", player.getName());
