@@ -53,7 +53,7 @@ public class PickaxeCommand implements CommandExecutor {
             formatLore.add(ChatColor.translateAlternateColorCodes('&', lore));
         ItemStack pClone = this.pickaxe.clone();
         ItemMeta meta = pClone.getItemMeta();
-        meta.setDisplayName(ChatColor.RED + "PICKAXE OF DEATH");
+        meta.setDisplayName(ChatColor.translateAlternateColorCodes('&', CustomPickaxe.getInstance().getConfig().getString("pickaxe-name")));
         meta.setLore(formatLore);
         pClone.setItemMeta(meta);
         return pClone;
