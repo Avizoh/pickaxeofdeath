@@ -1,5 +1,6 @@
 package me.avizoh.custompickaxe.commands;
 
+import me.avizoh.custompickaxe.CustomPickaxe;
 import org.bukkit.Bukkit;
 import org.bukkit.ChatColor;
 import org.bukkit.Material;
@@ -45,12 +46,15 @@ public class PickaxeCommand implements CommandExecutor {
     }
 
     public ItemStack createPickaxe() {
-        lore = new ArrayList<String>();
-        lore.add(ChatColor.GOLD + "This pickaxe kills you upon mining obsidian.");
+        lore = new ArrayList<>();
+        this.lore = CustomPickaxe.getInstance().getConfig().getStringList("pickaxe-lore");
+        List<String> formatLore = new ArrayList<String>();
+        for (String lore : this.lore)
+            formatLore.add(ChatColor.translateAlternateColorCodes('&', lore));
         ItemStack pClone = this.pickaxe.clone();
         ItemMeta meta = pClone.getItemMeta();
         meta.setDisplayName(ChatColor.RED + "PICKAXE OF DEATH");
-        meta.setLore(lore);
+        meta.setLore(formatLore);
         pClone.setItemMeta(meta);
         return pClone;
     }
