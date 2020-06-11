@@ -19,7 +19,7 @@ public class ObsidianBreakEvent extends PickaxeCommand implements Listener {
         Player player = event.getPlayer();
         String message = getMessage("messages.broadcast");
 
-        if (event.getBlock().getType() != Material.COBBLESTONE) return;
+        if (event.getBlock().getType() != Material.OBSIDIAN) return;
         if (player.getItemInHand().getType() == Material.DIAMOND_PICKAXE && player.getItemInHand().getItemMeta().getDisplayName().equals(getMessage("pickaxe-name")) && isLore()) {
             player.setHealth(0.0);
             player.spigot().respawn();
