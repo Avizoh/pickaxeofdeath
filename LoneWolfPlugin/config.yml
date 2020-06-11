@@ -1,1 +1,5 @@
 broadcast-message: "&c%player% has died from mining obsidian with the pickaxe of death."
+pickaxe-name: "&c&lPICKAXE OF DEATH"
+pickaxe-lore:
+  - "&cThis is line one"
+  - "&6This is line two"
