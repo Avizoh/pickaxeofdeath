@@ -3,12 +3,15 @@ package me.avizoh.custompickaxe;
 import me.avizoh.custompickaxe.commands.PickaxeCommand;
 import me.avizoh.custompickaxe.events.ObsidianBreakEvent;
 import net.milkbowl.vault.economy.Economy;
+import org.bukkit.configuration.InvalidConfigurationException;
 import org.bukkit.configuration.file.FileConfiguration;
+import org.bukkit.configuration.file.YamlConfiguration;
 import org.bukkit.plugin.PluginManager;
 import org.bukkit.plugin.RegisteredServiceProvider;
 import org.bukkit.plugin.java.JavaPlugin;
 
 import java.io.File;
+import java.io.IOException;
 
 public class CustomPickaxe extends JavaPlugin {
 
@@ -34,17 +37,25 @@ public class CustomPickaxe extends JavaPlugin {
         pm.registerEvents(new ObsidianBreakEvent(), this);
 
         createConfig();
-        this.config = getConfig();
-        this.config.options().copyDefaults();
     }
 
     @Override
     public void onDisable() { instance = null; saveConfig(); }
 
     private void createConfig() {
-        this.configFile = new File(getDataFolder(), "config.yml");
-        if (!this.configFile.exists()) { saveDefaultConfig(); }
+        configFile = new File(getDataFolder(), "config.yml");
+        if (!configFile.exists()) {
+            configFile.getParentFile().mkdirs();
+        }
+
+        config = new YamlConfiguration();
+        try {
+            config.load(configFile);
+        } catch (IOException | InvalidConfigurationException e) {
+            e.printStackTrace();
+        }
     }
+
     private boolean setupEconomy() {
         if (pm.getPlugin("Vault") == null) { return false; }
         RegisteredServiceProvider<Economy> rsp = getServer().getServicesManager().getRegistration(Economy.class);
